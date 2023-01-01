@@ -41,13 +41,29 @@ class Currency:
   def __iadd__(self,other):
     return Currency.__add__(self,other)
 
-  # def __radd__(self,other):
+  def __radd__(self,other):
+    res = self + other 
+    if self.unit != "USD":
+      res.changeTo("USD")
+    return res 
 
-  # def __sub__(self,other):
+  def __sub__(self,other):
+    # same logic as add as it is just defining the + operator
+    if type(other) == int or type(other) == float: 
+      x = (other * Currency.currencies[self.unit])
+    else: 
+      x = (other.value / Currency.currencies[other.unit] * Currency.currencies[self.unit])
+    return Currency(self.value -x, self.unit)    
 
-  # def __isub__(self,other):
+  def __isub__(self,other):
+    return Currency.__sub__(self,other)
 
-  # def __rsub__(self,other:)      
+  def __rsub__(self,other):
+    res = other - self.value
+    res = Currency(res,self.unit)
+    if self.unit != "USD":
+      res.changeTo("USD")
+    return res         
 
 
   
