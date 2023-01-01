@@ -38,7 +38,8 @@ class Currency:
     #Defines the '+' operator. If other is a Currency object, the currency values are added and the result will be the unit of self. If other is an int or a float, other will be treated as a USD value.
 
                 
-  # def __iadd__(self,other):
+  def __iadd__(self,other):
+    return Currency.__add__(self,other)
 
   # def __radd__(self,other):
 
